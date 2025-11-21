@@ -1,0 +1,196 @@
+================================================================================
+Cppcheck Security Vulnerability Scan Report
+Generated Time: 2025-11-09 00:04:51
+================================================================================
+
+Overall Statistics:
+--------------------------------------------------------------------------------
+Total Issues: 36
+
+  ERROR: 36
+
+================================================================================
+
+
+ERROR (36 issues):
+--------------------------------------------------------------------------------
+
+[1] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_01.c
+    Line: 22
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[2] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_02.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[3] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_03.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[4] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_04.c
+    Line: 27
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[5] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_05.c
+    Line: 27
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[6] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_06.c
+    Line: 26
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[7] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_07.c
+    Line: 26
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[8] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_08.c
+    Line: 34
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[9] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_09.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[10] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_10.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[11] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_11.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[12] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_12.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[13] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_13.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[14] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_14.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[15] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_15.c
+    Line: 25
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[16] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_16.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[17] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_17.c
+    Line: 25
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[18] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memcpy_18.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[19] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_01.c
+    Line: 22
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[20] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_02.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[21] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_03.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[22] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_04.c
+    Line: 27
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[23] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_05.c
+    Line: 27
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[24] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_06.c
+    Line: 26
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[25] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_07.c
+    Line: 26
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[26] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_08.c
+    Line: 34
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[27] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_09.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[28] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_10.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[29] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_11.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[30] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_12.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[31] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_13.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[32] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_14.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[33] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_15.c
+    Line: 25
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[34] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_16.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[35] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_17.c
+    Line: 25
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst
+
+[36] bufferAccessOutOfBounds
+    File: bad_code_clean/CWE121_Stack_Based_Buffer_Overflow__char_type_overrun_memmove_18.c
+    Line: 24
+    Description: Buffer is accessed out of bounds: structCharVoid.charFirst

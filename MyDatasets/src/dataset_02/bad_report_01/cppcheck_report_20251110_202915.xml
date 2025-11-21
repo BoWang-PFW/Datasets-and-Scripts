@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.18.0"/>
+    <errors>
+        <error id="doubleFree" severity="error" msg="Memory pointed to by &apos;buf2R1&apos; is freed twice." verbose="Memory pointed to by &apos;buf2R1&apos; is freed twice." cwe="415" file0="../dataset_02/bad_code/Doubly_freeing_memory.c">
+            <location file="../dataset_02/bad_code/Doubly_freeing_memory.c" line="15" column="1"/>
+            <location file="../dataset_02/bad_code/Doubly_freeing_memory.c" line="12" column="1"/>
+            <symbol>buf2R1</symbol>
+        </error>
+        <error id="nullPointerOutOfMemory" severity="warning" msg="If memory allocation fails, then there is a possible null pointer dereference: buf1R2" verbose="If memory allocation fails, then there is a possible null pointer dereference: buf1R2" cwe="476" file0="../dataset_02/bad_code/Doubly_freeing_memory.c">
+            <location file="../dataset_02/bad_code/Doubly_freeing_memory.c" line="14" column="9" info="Null pointer dereference"/>
+            <location file="../dataset_02/bad_code/Doubly_freeing_memory.c" line="13" column="10" info="Assignment &apos;buf1R2=(char*)malloc(512)&apos;, assigned value is 0"/>
+            <location file="../dataset_02/bad_code/Doubly_freeing_memory.c" line="13" column="25" info="Assuming allocation function fails"/>
+            <symbol>buf1R2</symbol>
+        </error>
+        <error id="deallocuse" severity="error" msg="Dereferencing &apos;buf2R1&apos; after it is deallocated / released" verbose="Dereferencing &apos;buf2R1&apos; after it is deallocated / released" cwe="416" file0="../dataset_02/bad_code/Using_freed_memory.c">
+            <location file="../dataset_02/bad_code/Using_freed_memory.c" line="15" column="9"/>
+            <symbol>buf2R1</symbol>
+        </error>
+        <error id="nullPointerOutOfMemory" severity="warning" msg="If memory allocation fails, then there is a possible null pointer dereference: buf2R1" verbose="If memory allocation fails, then there is a possible null pointer dereference: buf2R1" cwe="476" inconclusive="true" file0="../dataset_02/bad_code/Using_freed_memory.c">
+            <location file="../dataset_02/bad_code/Using_freed_memory.c" line="15" column="9" info="Null pointer dereference"/>
+            <location file="../dataset_02/bad_code/Using_freed_memory.c" line="11" column="10" info="Assignment &apos;buf2R1=(char*)malloc(512)&apos;, assigned value is 0"/>
+            <location file="../dataset_02/bad_code/Using_freed_memory.c" line="11" column="25" info="Assuming allocation function fails"/>
+            <symbol>buf2R1</symbol>
+        </error>
+        <error id="memleak" severity="error" msg="Memory leak: buf1" verbose="Memory leak: buf1" cwe="401" file0="../dataset_02/bad_code/Write-what-where_condition.c">
+            <location file="../dataset_02/bad_code/Write-what-where_condition.c" line="7" column="1"/>
+            <symbol>buf1</symbol>
+        </error>
+        <error id="nullPointerOutOfMemory" severity="warning" msg="If memory allocation fails, then there is a possible null pointer dereference: buf1" verbose="If memory allocation fails, then there is a possible null pointer dereference: buf1" cwe="476" file0="../dataset_02/bad_code/Write-what-where_condition.c">
+            <location file="../dataset_02/bad_code/Write-what-where_condition.c" line="5" column="8" info="Null pointer dereference"/>
+            <location file="../dataset_02/bad_code/Write-what-where_condition.c" line="3" column="14" info="Assignment &apos;buf1=(char*)malloc(256)&apos;, assigned value is 0"/>
+            <location file="../dataset_02/bad_code/Write-what-where_condition.c" line="3" column="29" info="Assuming allocation function fails"/>
+            <symbol>buf1</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00045-large.c">
+            <location file="../dataset_02/bad_code/basic-00045-large.c" line="57" column="10" info="Buffer overrun"/>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00045-med.c">
+            <location file="../dataset_02/bad_code/basic-00045-med.c" line="57" column="10" info="Buffer overrun"/>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00045-min.c">
+            <location file="../dataset_02/bad_code/basic-00045-min.c" line="57" column="10" info="Buffer overrun"/>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00047-large.c">
+            <location file="../dataset_02/bad_code/basic-00047-large.c" line="60" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00047-large.c">
+            <location file="../dataset_02/bad_code/basic-00047-large.c" line="60" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00047-med.c">
+            <location file="../dataset_02/bad_code/basic-00047-med.c" line="60" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00047-med.c">
+            <location file="../dataset_02/bad_code/basic-00047-med.c" line="60" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00047-min.c">
+            <location file="../dataset_02/bad_code/basic-00047-min.c" line="60" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00047-min.c">
+            <location file="../dataset_02/bad_code/basic-00047-min.c" line="60" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00047-ok.c">
+            <location file="../dataset_02/bad_code/basic-00047-ok.c" line="60" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00048-large.c">
+            <location file="../dataset_02/bad_code/basic-00048-large.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00048-large.c">
+            <location file="../dataset_02/bad_code/basic-00048-large.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00048-med.c">
+            <location file="../dataset_02/bad_code/basic-00048-med.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00048-med.c">
+            <location file="../dataset_02/bad_code/basic-00048-med.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00048-min.c">
+            <location file="../dataset_02/bad_code/basic-00048-min.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00048-min.c">
+            <location file="../dataset_02/bad_code/basic-00048-min.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00048-ok.c">
+            <location file="../dataset_02/bad_code/basic-00048-ok.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00049-large.c">
+            <location file="../dataset_02/bad_code/basic-00049-large.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00049-large.c">
+            <location file="../dataset_02/bad_code/basic-00049-large.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00049-med.c">
+            <location file="../dataset_02/bad_code/basic-00049-med.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00049-med.c">
+            <location file="../dataset_02/bad_code/basic-00049-med.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: buf" verbose="Buffer is accessed out of bounds: buf" cwe="788" file0="../dataset_02/bad_code/basic-00049-min.c">
+            <location file="../dataset_02/bad_code/basic-00049-min.c" line="62" column="11" info="Buffer overrun"/>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00049-min.c">
+            <location file="../dataset_02/bad_code/basic-00049-min.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="terminateStrncpy" severity="warning" msg="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy()." verbose="The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy(). If the source string&apos;s size fits or exceeds the given size, strncpy() does not add a zero at the end of the buffer. This causes bugs later in the code if the code assumes buffer is null-terminated." cwe="170" inconclusive="true" file0="../dataset_02/bad_code/basic-00049-ok.c">
+            <location file="../dataset_02/bad_code/basic-00049-ok.c" line="62" column="3"/>
+            <symbol>buf</symbol>
+        </error>
+    </errors>
+</results>

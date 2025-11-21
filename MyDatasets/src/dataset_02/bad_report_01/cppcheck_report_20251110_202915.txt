@@ -1,0 +1,170 @@
+================================================================================
+Cppcheck Security Vulnerability Scan Report
+Generated Time: 2025-11-10 20:29:15
+================================================================================
+
+Overall Statistics:
+--------------------------------------------------------------------------------
+Total Issues: 30
+
+  ERROR: 15
+  WARNING: 15
+
+================================================================================
+
+
+ERROR (15 issues):
+--------------------------------------------------------------------------------
+
+[1] doubleFree
+    File: ../dataset_02/bad_code/Doubly_freeing_memory.c
+    Line: 15
+    Description: Memory pointed to by 'buf2R1' is freed twice.
+
+[2] deallocuse
+    File: ../dataset_02/bad_code/Using_freed_memory.c
+    Line: 15
+    Description: Dereferencing 'buf2R1' after it is deallocated / released
+
+[3] memleak
+    File: ../dataset_02/bad_code/Write-what-where_condition.c
+    Line: 7
+    Description: Memory leak: buf1
+
+[4] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00045-large.c
+    Line: 57
+    Description: Buffer is accessed out of bounds: buf
+
+[5] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00045-med.c
+    Line: 57
+    Description: Buffer is accessed out of bounds: buf
+
+[6] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00045-min.c
+    Line: 57
+    Description: Buffer is accessed out of bounds: buf
+
+[7] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00047-large.c
+    Line: 60
+    Description: Buffer is accessed out of bounds: buf
+
+[8] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00047-med.c
+    Line: 60
+    Description: Buffer is accessed out of bounds: buf
+
+[9] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00047-min.c
+    Line: 60
+    Description: Buffer is accessed out of bounds: buf
+
+[10] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00048-large.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+[11] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00048-med.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+[12] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00048-min.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+[13] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00049-large.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+[14] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00049-med.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+[15] bufferAccessOutOfBounds
+    File: ../dataset_02/bad_code/basic-00049-min.c
+    Line: 62
+    Description: Buffer is accessed out of bounds: buf
+
+WARNING (15 issues):
+--------------------------------------------------------------------------------
+
+[1] nullPointerOutOfMemory
+    File: ../dataset_02/bad_code/Doubly_freeing_memory.c
+    Line: 14
+    Description: If memory allocation fails, then there is a possible null pointer dereference: buf1R2
+
+[2] nullPointerOutOfMemory
+    File: ../dataset_02/bad_code/Using_freed_memory.c
+    Line: 15
+    Description: If memory allocation fails, then there is a possible null pointer dereference: buf2R1
+
+[3] nullPointerOutOfMemory
+    File: ../dataset_02/bad_code/Write-what-where_condition.c
+    Line: 5
+    Description: If memory allocation fails, then there is a possible null pointer dereference: buf1
+
+[4] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00047-large.c
+    Line: 60
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[5] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00047-med.c
+    Line: 60
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[6] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00047-min.c
+    Line: 60
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[7] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00047-ok.c
+    Line: 60
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[8] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00048-large.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[9] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00048-med.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[10] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00048-min.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[11] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00048-ok.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[12] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00049-large.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[13] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00049-med.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[14] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00049-min.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().
+
+[15] terminateStrncpy
+    File: ../dataset_02/bad_code/basic-00049-ok.c
+    Line: 62
+    Description: The buffer 'buf' may not be null-terminated after the call to strncpy().

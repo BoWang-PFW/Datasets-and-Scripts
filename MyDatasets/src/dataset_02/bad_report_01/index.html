@@ -1,0 +1,272 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - [project name]</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script>
+      function getStyle(el, styleProp) {
+        var y;
+
+        if (el.currentStyle) {
+          y = el.currentStyle[styleProp];
+        } else if (window.getComputedStyle) {
+          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+
+        return y;
+      }
+
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+
+        if (el.style.display === "block") {
+          el.style.display = "none";
+          mark.textContent = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.textContent = "[-]";
+        }
+      }
+
+      function initExpandables() {
+        var elements = document.querySelectorAll(".expandable");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var el = elements[i];
+          var clickable = el.querySelector("span");
+          var marker = clickable.querySelector(".marker");
+          var content = el.querySelector(".content");
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.addEventListener("click", toggle);
+        }
+      }
+
+      function toggleDisplay(cb) {
+        var elements = document.querySelectorAll("." + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("id-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleSeverity(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".sev_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("severity-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+      
+      function toggleClassification(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".class_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("classification-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+    
+      function toggleTool(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+
+        var elements;
+        if (cb.id == "clang-tidy")
+            elements = document.querySelectorAll("[class^=clang-tidy-]");
+        else
+            elements = document.querySelectorAll(".issue:not([class^=clang-tidy-])");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("tool-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleAll() {
+        var elements = document.querySelectorAll(".idToggle");
+
+        // starting from 1 since 0 is the "toggle all" input
+        for (var i = 1, len = elements.length; i < len; i++) {
+          var changed = elements[i].checked != elements[0].checked;
+          if (changed) {
+            elements[i].checked = elements[0].checked;
+            toggleDisplay(elements[i]);
+          }
+        }
+      }
+
+      function filterFile(filter) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector("tr").querySelector("td").textContent.toLowerCase().includes(filter.toLowerCase());
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+      }
+
+      function filterText(text) {
+        filter = text.toLowerCase();
+        var elements = document.querySelectorAll(".issue");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = false;
+          var fields = elements[i].querySelectorAll("td");
+          for (var n = 0, num = fields.length; n < num; n++) {
+            if (fields[n].textContent.toLowerCase().includes(filter)) {
+              visible = true;
+              break;
+            }
+          }
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+
+        updateFileRows();
+      }
+
+      function updateFileRows(element) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector(".issue:not(.id-filtered):not(.severity-filtered):not(.classification-filtered):not(.tool-filtered):not(.text-filtered)");
+          elements[i].classList.toggle("file-filtered", !visible);
+        }
+      }
+
+      window.addEventListener("load", initExpandables);
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="header" class="header">
+      <h1>Cppcheck report - [project name]</h1>
+      <div id="filters">
+
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="error"checked/>error</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="warning"checked/>warning</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="portability"disabled/>portability</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="performance"disabled/>performance</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="style"disabled/>style</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="information"disabled/>information</label>
+        | 
+        <label class="checkBtn"><input type="checkbox" onclick="toggleTool(this)" id="cppcheck"checked/>cppcheck</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleTool(this)" id="clang-tidy"disabled/>clang-tidy</label>
+        | 
+        <label class="severityHeader">File: <input type="search" oninput="filterFile(this.value)"/></label>
+        <label class="severityHeader">Filter: <input type="search" oninput="filterText(this.value)"/></label>
+      </div>
+
+    </div>
+
+    <div id="menu_index">
+     <p><a href="index.html">Defect summary</a> </p>
+
+       <label><input type="checkbox" class="idToggle" onclick="toggleAll()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="bufferAccessOutOfBounds" name="bufferAccessOutOfBounds" checked></td><td>12</td><td>bufferAccessOutOfBounds</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="terminateStrncpy" name="terminateStrncpy" checked></td><td>12</td><td>terminateStrncpy</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="nullPointerOutOfMemory" name="nullPointerOutOfMemory" checked></td><td>3</td><td>nullPointerOutOfMemory</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="deallocuse" name="deallocuse" checked></td><td>1</td><td>deallocuse</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="doubleFree" name="doubleFree" checked></td><td>1</td><td>doubleFree</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="memleak" name="memleak" checked></td><td>1</td><td>memleak</td></tr>
+           <tr><td></td><td>30</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+    </div>
+    <div id="content_index">
+
+       <table class="summaryTable">
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th><th>Timestamp</th></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="0.html">../dataset_02/bad_code/Doubly_freeing_memory.c</a></td></tr>
+         <tr class="nullPointerOutOfMemory sev_warning class_ issue"><td><a href="0.html#line-14">14</a></td><td>nullPointerOutOfMemory</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">If memory allocation fails, then there is a possible null pointer dereference: buf1R2</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="doubleFree sev_error class_ issue"><td><a href="0.html#line-15">15</a></td><td>doubleFree</td><td><a href="https://cwe.mitre.org/data/definitions/415.html">415</a></td><td>error</td><td class="error">Memory pointed to by &apos;buf2R1&apos; is freed twice.</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="1.html">../dataset_02/bad_code/Using_freed_memory.c</a></td></tr>
+         <tr class="deallocuse sev_error class_ issue"><td><a href="1.html#line-15">15</a></td><td>deallocuse</td><td><a href="https://cwe.mitre.org/data/definitions/416.html">416</a></td><td>error</td><td class="error">Dereferencing &apos;buf2R1&apos; after it is deallocated / released</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="nullPointerOutOfMemory sev_warning, inconcl. class_ issue"><td><a href="1.html#line-15">15</a></td><td>nullPointerOutOfMemory</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning, inconcl.</td><td class="inconclusive">If memory allocation fails, then there is a possible null pointer dereference: buf2R1</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="2.html">../dataset_02/bad_code/Write-what-where_condition.c</a></td></tr>
+         <tr class="nullPointerOutOfMemory sev_warning class_ issue"><td><a href="2.html#line-5">5</a></td><td>nullPointerOutOfMemory</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">If memory allocation fails, then there is a possible null pointer dereference: buf1</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="memleak sev_error class_ issue"><td><a href="2.html#line-7">7</a></td><td>memleak</td><td><a href="https://cwe.mitre.org/data/definitions/401.html">401</a></td><td>error</td><td class="error">Memory leak: buf1</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="3.html">../dataset_02/bad_code/basic-00045-large.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="3.html#line-57">57</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="4.html">../dataset_02/bad_code/basic-00045-med.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="4.html#line-57">57</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="5.html">../dataset_02/bad_code/basic-00045-min.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="5.html#line-57">57</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="6.html">../dataset_02/bad_code/basic-00047-large.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="6.html#line-60">60</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="6.html#line-60">60</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="7.html">../dataset_02/bad_code/basic-00047-med.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="7.html#line-60">60</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="7.html#line-60">60</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="8.html">../dataset_02/bad_code/basic-00047-min.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="8.html#line-60">60</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="8.html#line-60">60</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="9.html">../dataset_02/bad_code/basic-00047-ok.c</a></td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="9.html#line-60">60</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="10.html">../dataset_02/bad_code/basic-00048-large.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="10.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="10.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="11.html">../dataset_02/bad_code/basic-00048-med.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="11.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="11.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="12.html">../dataset_02/bad_code/basic-00048-min.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="12.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="12.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="13.html">../dataset_02/bad_code/basic-00048-ok.c</a></td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="13.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="14.html">../dataset_02/bad_code/basic-00049-large.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="14.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="14.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="15.html">../dataset_02/bad_code/basic-00049-med.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="15.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="15.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="16.html">../dataset_02/bad_code/basic-00049-min.c</a></td></tr>
+         <tr class="bufferAccessOutOfBounds sev_error class_ issue"><td><a href="16.html#line-62">62</a></td><td>bufferAccessOutOfBounds</td><td><a href="https://cwe.mitre.org/data/definitions/788.html">788</a></td><td>error</td><td class="error">Buffer is accessed out of bounds: buf</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="16.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="17.html">../dataset_02/bad_code/basic-00049-ok.c</a></td></tr>
+         <tr class="terminateStrncpy sev_warning, inconcl. class_ issue"><td><a href="17.html#line-62">62</a></td><td>terminateStrncpy</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">170</a></td><td>warning, inconcl.</td><td class="inconclusive">The buffer &apos;buf&apos; may not be null-terminated after the call to strncpy().</td><td>Mon Nov 10 20:29:15 2025</td></tr>
+      </tbody>
+       </table>
+    </div>
+    <div id="footer" class="footer">
+      <p>
+        Created by Cppcheck 2.18.0 (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.libera.chat/#cppcheck">IRC</a>)
+      </p>
+    </div>
+    </div>
+  </body>
+</html>
