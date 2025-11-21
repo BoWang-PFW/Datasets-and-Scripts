@@ -100,7 +100,7 @@ int main() {
     }
     
     try:
-        response = requests.post(OLLAMA_API_URL, json=payload, timeout=30)
+        response = requests.post(OLLAMA_API_URL, json=payload, timeout=90)
         result = response.json()
         response_text = result['response'].lower()
 
