@@ -64,7 +64,7 @@ class ResultAnalyzer:
         print("Vulnerability Scan Results Analysis Summary")
         print("="*70)
         
-        print(f"\n📊 Overall Statistics:")
+        print(f"\n Overall Statistics:")
         print(f"  Total files: {s['total']}")
         print(f"  Successful scans: {s['success_count']} ({s['success_count']/s['total']*100:.1f}%)")
         print(f"  Failed scans: {s['failed_count']}")
@@ -80,7 +80,7 @@ class ResultAnalyzer:
             print(f"  Safe files: {safe_count} ({safe_count/s['success_count']*100:.1f}%)")
         
         if s['vuln_types']:
-            print(f"\n🐛 Vulnerability Types:")
+            print(f"\n Vulnerability Types:")
             for vtype, count in s['vuln_types'].most_common():
                 print(f"  • {vtype}: {count}")
         
@@ -100,7 +100,7 @@ class ResultAnalyzer:
         """Print vulnerability details"""
         vulns = self.stats['vulnerabilities']
         if not vulns:
-            print("\n✅ No vulnerabilities found!")
+            print("\nNo vulnerabilities found!")
             return
         
         print(f"\n{'='*70}")
@@ -110,25 +110,25 @@ class ResultAnalyzer:
         for i, v in enumerate(vulns[:limit], 1):
             analysis = v.get('analysis', {})
             print(f"\n[{i}] {v['file_name']}")
-            print(f"    📁 {v['file']}")
-            print(f"    🐛 Type: {analysis.get('vulnerability_type', 'unknown')}")
-            print(f"    ⚡ Severity: {analysis.get('severity', 'unknown')}")
+            print(f"    {v['file']}")
+            print(f"    Type: {analysis.get('vulnerability_type', 'unknown')}")
+            print(f"    Severity: {analysis.get('severity', 'unknown')}")
             
             if analysis.get('line_numbers'):
-                print(f"    📍 Line numbers: {', '.join(map(str, analysis['line_numbers']))}")
+                print(f"    Line numbers: {', '.join(map(str, analysis['line_numbers']))}")
             
             desc = analysis.get('description', '')
             if desc:
                 desc = desc if verbose or len(desc) <= 150 else desc[:150] + "..."
-                print(f"    📝 {desc}")
+                print(f"    {desc}")
             
             if analysis.get('confidence'):
-                print(f"    🎯 Confidence: {analysis['confidence']}%")
+                print(f"    Confidence: {analysis['confidence']}%")
             
             if verbose:
                 fix = analysis.get('secure_fix') or analysis.get('secure_implementation')
                 if fix:
-                    print(f"    🔧 Fix Suggestions:")
+                    print(f"    Fix Suggestions:")
                     for line in fix.split('\n')[:8]:
                         if line.strip():
                             print(f"       {line}")
@@ -181,7 +181,7 @@ class ResultAnalyzer:
                 
                 writer.writerow(row)
         
-        print(f"\n✅ CSV exported to: {output_file}")
+        print(f"\nCSV exported to: {output_file}")
         print(f"   Contains {len(all_files)} records")
     
     def export_vulnerability_only_csv(self, output_file):
@@ -189,7 +189,7 @@ class ResultAnalyzer:
         vulns = self.stats['vulnerabilities']
         
         if not vulns:
-            print("\n⚠️  No vulnerabilities found, no export needed")
+            print("\n No vulnerabilities found, no export needed")
             return
         
         headers = [
@@ -216,7 +216,7 @@ class ResultAnalyzer:
                      analysis.get('secure_implementation', ''))[:500]
                 ])
         
-        print(f"\n✅ Vulnerability CSV exported to: {output_file}")
+        print(f"\n Vulnerability CSV exported to: {output_file}")
         print(f"   Contains {len(vulns)} vulnerabilities")
 
 
@@ -256,11 +256,11 @@ Examples:
     
     # Check if file exists
     if not Path(args.result_file).exists():
-        print(f"❌ Error: File does not exist {args.result_file}")
+        print(f"Error: File does not exist {args.result_file}")
         return
     
     # Analyze results
-    print(f"📂 Loading results: {args.result_file}")
+    print(f"Loading results: {args.result_file}")
     analyzer = ResultAnalyzer(args.result_file)
     
     # Print summary

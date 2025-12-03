@@ -1,6 +1,0 @@
-﻿File Name,File Path,Has Vulnerability,Vulnerability Type,Severity,Line Numbers,Confidence,JSON Parsed Successfully,Description,Fix Suggestions
-basic-00049-ok.c,../../dataset_02/bad_code/basic-00049-ok.c,是,buffer_overflow,high,16,90,是,strncpy no bounds check,use strcpy
-basic-00046-min.c,../../dataset_02/bad_code/basic-00046-min.c,是,buffer_overflow,high,1,90,是,strcpy no bounds check,use strncpy
-basic-00045-large.c,../../dataset_02/bad_code/basic-00045-large.c,是,buffer_overflow,high,1,90,是,strcpy no bounds check,use strncpy
-basic-00045-ok.c,../../dataset_02/bad_code/basic-00045-ok.c,是,buffer_overflow,high,1,90,是,strcpy no bounds check,use strncpy
-Buffer_overflow.c,../../dataset_02/bad_code/Buffer_overflow.c,是,buffer_overflow,high,3,90,是,strcpy no bounds check,use strncpy
