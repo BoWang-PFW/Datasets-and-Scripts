@@ -9,7 +9,7 @@ DELAY_BETWEEN_FILES = 0.5
 REQUEST_TIMEOUT = 120
 
 # Simplified prompt for better JSON compliance
-VULNERABILITY_PROMPT = """Analyze for buffer overflow. Output JSON only, no explanation.
+VULNERABILITY_PROMPT = """Analyze for buffer overflow. Output JSON only, explain in one sentence.
 
 Example input:
 ```c
