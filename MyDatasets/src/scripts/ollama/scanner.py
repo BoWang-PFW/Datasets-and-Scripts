@@ -256,5 +256,11 @@ class VulnerabilityScanner:
                         if r.get('success') and r.get('analysis', {}).get('has_vulnerability'))
         print(f"Vulnerabilities detected: {vuln_count}")
         print(f"Results saved to: {output_file}")
-        
+
+        # Count vulnerabilities
+        vuln_count = sum(1 for r in results
+                        if r.get('success') and 
+                        r.get('analysis', {}).get('has_vulnerability', False))
+        print(f"Vulnerable files detected: {vuln_count}")
+
         return output_file
