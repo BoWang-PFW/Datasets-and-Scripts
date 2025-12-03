@@ -3,3 +3,4 @@ ollama_env/
 *.pyc
 .DS_Store
 *.xlsx
+Results/
