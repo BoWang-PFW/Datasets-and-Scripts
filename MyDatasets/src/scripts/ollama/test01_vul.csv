@@ -1,6 +1,0 @@
-﻿Index,File Name,File Path,Vulnerability Type,Severity,Line Numbers,Confidence,Description,Fix Suggestions
-1,basic-00049-ok.c,../../dataset_02/bad_code/basic-00049-ok.c,buffer_overflow,high,16,90,strncpy no bounds check,use strcpy
-2,basic-00046-min.c,../../dataset_02/bad_code/basic-00046-min.c,buffer_overflow,high,1,90,strcpy no bounds check,use strncpy
-3,basic-00045-large.c,../../dataset_02/bad_code/basic-00045-large.c,buffer_overflow,high,1,90,strcpy no bounds check,use strncpy
-4,basic-00045-ok.c,../../dataset_02/bad_code/basic-00045-ok.c,buffer_overflow,high,1,90,strcpy no bounds check,use strncpy
-5,Buffer_overflow.c,../../dataset_02/bad_code/Buffer_overflow.c,buffer_overflow,high,3,90,strcpy no bounds check,use strncpy

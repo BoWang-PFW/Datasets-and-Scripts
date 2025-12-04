@@ -4,3 +4,4 @@ ollama_env/
 .DS_Store
 *.xlsx
 Results/
+.env
